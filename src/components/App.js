@@ -1,6 +1,7 @@
 import Router from "components/Router";
 import { useEffect, useState } from "react";
 import { authService } from "firebaseInstance";
+import Home from "./Home";
 
 function App() {
   const [init, setInit] = useState(false)
@@ -16,7 +17,7 @@ function App() {
   }, [])
   return (
     <>
-      {init ? <Router isLoggedin={isLoggedin} setIsLoggedIn={setIsLoggedIn}/> : "loading..."}
+      {init ? <Router isLoggedin={isLoggedin} setIsLoggedIn={setIsLoggedIn}/> : <Home />}
       <footer>&copy; {new Date().getFullYear()} toomanythoughts.</footer>    
     </>
   );
