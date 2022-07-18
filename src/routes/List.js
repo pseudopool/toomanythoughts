@@ -9,9 +9,21 @@ const List = ({setIsLoggedIn}) => {
             setIsLoggedIn(false);
         }
     return (
-    <>
-        <Link to="/"><button onClick={onLogOutClick}>Log Out</button></Link>
-    </>
+            <main className="list_container">
+                <header>
+                    <h1>내 생각 목록📂</h1>
+                    <hr />
+                </header>
+                <section>
+                    <h3>오늘</h3>
+                </section>
+                <section>
+                    <h3>과거</h3>
+                </section>
+                <footer>
+                    <Link to="/"><button onClick={onLogOutClick}>Log Out</button></Link>
+                </footer>
+            </main>
     )
 }
 export default List;
