@@ -1,7 +1,21 @@
 import React from "react";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom"
+import { collection, addDoc } from "firebase/firestore";
+import { dbService } from "firebaseInstance";
 
 const Flow = ({input, fix, factButton}) => {
+
+    const handleOnSubmit = async (event) => {
+        event.preventDefault();
+        await addDoc(collection(dbService, "flow"), {
+            input,
+            fix,
+            factButton,
+            createdAt: new Date()
+        })
+        window.location.replace('/list')
+    }
+
     return (
         <main className="flow_container">
         <header>
@@ -23,7 +37,7 @@ const Flow = ({input, fix, factButton}) => {
             <h3>명료하게 수정된 오늘의 생각을 기록하세요.</h3>
         </section>
         <footer>
-            <Link to="/list"><button className="input_submit">저장</button></Link>
+            <form onSubmit={handleOnSubmit}><button className="input_submit">저장</button></form>
             <Link to="/fix"><button className="return_to_list">돌아가기</button></Link>
         </footer>
     </main>
