@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 import { collection, addDoc } from "firebase/firestore";
 import { dbService } from "firebaseInstance";
 
-const Flow = ({input, fix, factButton}) => {
+const Flow = ({input, fix, factButton, userObj}) => {
 
     const handleOnSubmit = async (event) => {
         event.preventDefault();
@@ -11,7 +11,8 @@ const Flow = ({input, fix, factButton}) => {
             input,
             fix,
             factButton,
-            createdAt: new Date()
+            createdAt: new Date().toLocaleDateString(),
+            creatorId: userObj.uid
         })
         window.location.replace('/list')
     }

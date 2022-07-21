@@ -1,4 +1,80 @@
 import { Link } from "react-router-dom";
+import styled from "styled-components";
+
+const FactCheckContainer = styled.div `
+    header {
+        margin-bottom: 20px;
+        h1 {
+        font-size: 30px;
+        font-weight: 700;
+        padding-bottom: 1.5rem;
+        }
+        p {
+        color: #C0C0C0;
+        font-size: 15px;
+        font-weight: 300;
+        line-height: 1.3rem;
+        }
+    }
+    section {
+        h3 {
+            margin-bottom: 1rem;
+        }
+        p {
+        background-color: #ADB5C9;
+        color: black;
+        width: 250px;
+        height: 150px;
+        border-radius: 1rem;
+        border: 0px;
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+    }
+    }
+    form {
+        cursor: pointer;
+        margin-bottom: 0.5rem;
+        background-color: #f5f5f5;
+        color: black;
+        padding: 0.5rem 1rem 0.5rem 1rem;
+        border-radius: 0.8rem;
+        font-size: 0.8rem;
+        :active {
+                background-color: #ADB5C9;;
+            }
+        button {
+            font-size: 1rem;
+            font-weight: 600;
+            border: 0px;
+        }
+    }
+    footer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 2rem;
+        button {
+            margin-bottom: 0.5rem;
+            padding: 0.5rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            width: 5rem;
+            border-radius: 0.8rem;
+            border: 0px;
+            cursor: pointer;
+            :active {
+                background-color: #433886;
+                color: white;
+            }
+        }
+        button.return_to_list {
+            background-color: #0C072F;
+            color: white;
+            border: 0.1px dashed white;
+            margin-bottom: 1rem;
+        }
+    }
+`
 
 function FactCheck({input, factButton, setFactButton}) {
     const facts = [{
@@ -38,26 +114,28 @@ function FactCheck({input, factButton, setFactButton}) {
     }
 
     return (
-        <main className="factcheck_container">
-            <header>
-                <h1>생각 검토하기🔍</h1>
-                <p>내 생각의 왜곡된 부분을 찾아보세요.</p>
-            </header>
-            <section>
-                <h3>지금 나의 생각</h3>
-                <p>{input}</p>
-            </section>
-            <section>
-                <h3>내 생각은 어떤 함정에 빠져있나요?</h3>
-                {facts.map((fact) => {
-                    return (<form key={fact.id} onClick={handleButtonClick}><button>{fact.title}</button>{fact.describtion}</form>)
-                })}
-            </section>
-            <footer>
-                <Link to="/fix"><button className="input_submit">선택 완료</button></Link>
-                <Link to="/"><button className="return_to_list">돌아가기</button></Link>
-            </footer>
-        </main>
+        <FactCheckContainer>
+            <main className="factcheck_container">
+                <header>
+                    <h1>생각 검토하기🔍</h1>
+                    <p>내 생각의 왜곡된 부분을 찾아보세요.</p>
+                </header>
+                <section>
+                    <h3>지금 나의 생각</h3>
+                    <p className="input">{input}</p>
+                </section>
+                <section>
+                    <h3>내 생각은 어떤 함정에 빠져있나요?</h3>
+                    {facts.map((fact) => {
+                        return (<form key={fact.id} onClick={handleButtonClick}><button>{fact.title}</button>{fact.describtion}</form>)
+                    })}
+                </section>
+                <footer>
+                    <Link to="/fix"><button className="input_submit">선택 완료</button></Link>
+                    <Link to="/"><button className="return_to_list">돌아가기</button></Link>
+                </footer>
+            </main>
+        </FactCheckContainer>
     )
 }
 

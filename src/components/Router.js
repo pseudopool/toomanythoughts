@@ -7,7 +7,7 @@ import FactCheck from "routes/FactCheck";
 import Fix from "routes/Fix";
 import Flow from "routes/Flow";
 
-const Router = ({isLoggedin, setIsLoggedIn}) => {
+const Router = ({isLoggedin, setIsLoggedIn, userObj}) => {
     const [input, setInput] = useState('')
     const [factButton, setFactButton] = useState([])
     const [fix, setFix] = useState('')
@@ -19,8 +19,8 @@ const Router = ({isLoggedin, setIsLoggedIn}) => {
                 <Route path="/" element={<Input input={input} setInput={setInput}/>} />
                 <Route path="/factcheck" element={<FactCheck input={input} factButton={factButton} setFactButton={setFactButton}/>} />
                 <Route path="/fix" element={<Fix input={input} factButton={factButton} fix={fix} setFix={setFix}/>} />
-                <Route path="/flow" element={<Flow input={input} fix={fix} factButton={factButton}/>} />
-                <Route path="/list" element={<List setIsLoggedIn={setIsLoggedIn} />} />
+                <Route path="/flow" element={<Flow input={input} fix={fix} factButton={factButton} userObj={userObj}/>} />
+                <Route path="/list" element={<List setIsLoggedIn={setIsLoggedIn} userObj={userObj}/>} />
                 </> :
                 <>
                 <Route path="/" element={<Auth />} />
