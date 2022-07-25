@@ -71,6 +71,7 @@ const GlobalStyle = createGlobalStyle`
             width: 5rem;
             border-radius: 0.8rem;
             border: 0px;
+            color: black;
             cursor: pointer;
             :active {
                 background-color: #433886;
