@@ -93,7 +93,7 @@ function FactCheck({input, factButton, setFactButton}) {
                 </section>
                 <footer>
                     <Link to="/fix"><button className="input_submit">선택 완료</button></Link>
-                    <Link to="/"><button className="return_to_list">돌아가기</button></Link>
+                    <Link to="/toomanythoughts"><button className="return_to_list">돌아가기</button></Link>
                 </footer>
             </main>
         </FactCheckContainer>

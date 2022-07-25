@@ -248,8 +248,8 @@ const List = ({setIsLoggedIn, userObj}) => {
                 </section>
                 {isClicked && <Overlay flows={flows} clickedFlow={clickedFlow}/>}
                 <footer>
-                <Link to="/"><button className="add">+</button></Link>
-                <Link to="/"><button className="logout" onClick={onLogOutClick}>Log Out</button></Link>
+                <Link to="/toomanythoughts"><button className="add">+</button></Link>
+                <Link to="/toomanythoughts"><button className="logout" onClick={onLogOutClick}>Log Out</button></Link>
                 </footer>
             </main>
         </ListContainer>

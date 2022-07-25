@@ -18,14 +18,14 @@ const Router = ({isLoggedin, setIsLoggedIn, userObj}) => {
         <Routes>
                     {isLoggedin ? 
                         <>
-                        <Route path="/" element={<Input input={input} setInput={setInput}/>} />
+                        <Route path="/toomanythoughts" element={<Input input={input} setInput={setInput}/>} />
                         <Route path="/factcheck" element={<FactCheck input={input} factButton={factButton} setFactButton={setFactButton}/>} />
                         <Route path="/fix" element={<Fix input={input} factButton={factButton} fix={fix} setFix={setFix}/>} />
                         <Route path="/flow" element={<Flow input={input} fix={fix} factButton={factButton} userObj={userObj}/>} />
                         <Route path="/list" element={<List setIsLoggedIn={setIsLoggedIn} userObj={userObj}/>} />
                         </> :
                         <>
-                        <Route path="/" element={<Auth />} />
+                        <Route path="/toomanythoughts" element={<Auth />} />
                         </>
                         }
         </Routes>
