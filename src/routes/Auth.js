@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { authService } from "firebaseInstance";
+import { motion } from "framer-motion";
 import styled from "styled-components";
 
 const AuthContainer = styled.div`
@@ -73,6 +74,11 @@ const Auth = () => {
     }
 
     return (
+        <motion.div
+        initial={{opacity: 0}}
+        animate={{opacity: 1}}
+        exit={{opacity: 0}}
+        >
     <AuthContainer>
         <header>
             <h1 className="logo">toomanythoughts.</h1>
@@ -108,6 +114,7 @@ const Auth = () => {
             {error}
         </form>
     </AuthContainer>
+    </motion.div>
 )
 }
 

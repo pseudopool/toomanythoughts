@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const Input = ({input, setInput}) => {
     const handleInputChange = (event) => {
@@ -7,6 +8,12 @@ const Input = ({input, setInput}) => {
     }
 
     return (
+        <motion.div
+        className="InputPage"
+        initial={{opacity: 0}}
+        animate={{opacity: 1}}
+        exit={{opacity: 0}}
+        >
             <main className="input_container">
                 <header>
                     <h1>무슨 생각 중인가요?</h1>
@@ -21,6 +28,7 @@ const Input = ({input, setInput}) => {
                     <Link to="/list"><button className="return_to_list">리스트 보기</button></Link>
                 </footer>
             </main>
+        </motion.div>
     )
 }
 export default Input;

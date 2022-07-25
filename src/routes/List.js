@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import { authService, dbService } from "firebaseInstance";
+import { motion } from "framer-motion";
 import { collection, query, onSnapshot, where, deleteDoc, doc, orderBy } from "firebase/firestore";
 import styled from "styled-components";
 
@@ -152,6 +153,11 @@ const List = ({setIsLoggedIn, userObj}) => {
             await deleteDoc(flowRef)
         }
             return (
+                <motion.div
+                initial={{opacity: 0}}
+                animate={{opacity: 1}}
+                exit={{opacity: 0}}
+                >
                 <OverlayWrapper>
                     {flows.map((flow) => {
                         if (flow.id === clickedFlow) {
@@ -181,6 +187,7 @@ const List = ({setIsLoggedIn, userObj}) => {
                         }
                     })}
                 </OverlayWrapper>
+                </motion.div>
             )
         }
 
@@ -197,6 +204,11 @@ const List = ({setIsLoggedIn, userObj}) => {
         }, [])
 
     return (
+        <motion.div
+        initial={{opacity: 0}}
+        animate={{opacity: 1}}
+        exit={{opacity: 0}}
+        >
         <ListContainer>
             <main className="list_container">
                 <header>
@@ -241,6 +253,7 @@ const List = ({setIsLoggedIn, userObj}) => {
                 </footer>
             </main>
         </ListContainer>
+        </motion.div>
     )
 }
 export default List;

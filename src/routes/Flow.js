@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom"
 import { collection, addDoc } from "firebase/firestore";
 import { dbService } from "firebaseInstance";
+import { motion } from "framer-motion";
 import styled from "styled-components";
 
 const FlowContainer = styled.div`
@@ -43,6 +44,11 @@ const Flow = ({input, fix, factButton, userObj}) => {
     }
 
     return (
+        <motion.div
+        initial={{opacity: 0}}
+        animate={{opacity: 1}}
+        exit={{opacity: 0}}
+        >
         <FlowContainer>
         <main className="flow_container">
         <header>
@@ -70,6 +76,7 @@ const Flow = ({input, fix, factButton, userObj}) => {
         </footer>
     </main>
     </FlowContainer>
+    </motion.div>
     )
 } 
 export default Flow;

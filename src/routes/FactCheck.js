@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { motion } from "framer-motion";
 
 const FactCheckContainer = styled.div `
     form {
@@ -68,6 +69,12 @@ function FactCheck({input, factButton, setFactButton}) {
     }
 
     return (
+        <motion.div
+        className="InputPage"
+        initial={{opacity: 0}}
+        animate={{opacity: 1}}
+        exit={{opacity: 0}}
+        >
         <FactCheckContainer>
             <main className="factcheck_container">
                 <header>
@@ -90,6 +97,7 @@ function FactCheck({input, factButton, setFactButton}) {
                 </footer>
             </main>
         </FactCheckContainer>
+        </motion.div>
     )
 }
 

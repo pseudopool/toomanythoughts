@@ -1,5 +1,6 @@
 import {Link} from 'react-router-dom'
 import styled from 'styled-components'
+import { motion } from 'framer-motion';
 
 const FixContainer = styled.div`
     div.fact_result {
@@ -30,6 +31,11 @@ function Fix({factButton, input, fix, setFix}) {
         console.log(fix)
     }
     return (
+        <motion.div
+        initial={{opacity: 0}}
+        animate={{opacity: 1}}
+        exit={{opacity: 0}}
+        >
         <FixContainer>
         <main className="fix_container">
         <header>
@@ -59,6 +65,7 @@ function Fix({factButton, input, fix, setFix}) {
         </footer>
     </main>
     </FixContainer>
+    </motion.div>
     )
 }
 
