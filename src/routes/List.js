@@ -76,14 +76,23 @@ const List = ({setIsLoggedIn, userObj}) => {
         padding: 5px;
         border-radius: 15px;
         width: 50%;
-        height: 50%;
+        height: auto;
         left: 25%;
-        top: 10%;
+        top: 8%;
         line-height: 2rem;
         display: flex;
         flex-direction: column;
         justify-content: center;
+        box-shadow: 1px 1px 10px 1px lightgrey;
+        h1 {
+            font-weight: 900;
+            font-size: 1.2rem;
+            padding: 1rem;
+        }
         button {
+            float: inline-end;
+            background-color: #0C072F;
+            color: white;
             margin-bottom: 0.5rem;
             padding: 0.5rem;
             font-size: 0.8rem;
@@ -97,11 +106,42 @@ const List = ({setIsLoggedIn, userObj}) => {
                 color: white;
             }
         }
+        .deleteButton {
+            background-color: lightgray;
+            margin-bottom: 1.5rem;
+        }
         div {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
+        }
+        section {
+            width: 240px;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            font-weight: 900;
+            font-size: 1rem;
+            span {
+                display: inline-block;
+                background-color: #0C072F;
+                color: lightgrey;
+                font-size: small;
+                margin: 0.1rem;
+                padding: 0 0.6rem 0 0.6rem;
+                border-radius: 0.5rem;
+            }
+            li {
+                list-style: none;
+                margin-bottom: 1.5rem;
+            }
+            p {
+                height: auto;
+                padding: 0.5rem;
+                padding-left: 1.5rem;
+                font-size: 0.8rem;
+            }
         }
     `
 
@@ -117,21 +157,25 @@ const List = ({setIsLoggedIn, userObj}) => {
                         if (flow.id === clickedFlow) {
                             return (
                                 <div key={flow.id}>
-                                    <h4>
-                                        인지 왜곡 교정 후 : {flow.fix}
-                                    </h4>
-                                    <p>
-                                        인지 왜곡 교정 전 : {flow.input}
-                                    </p>
-                                    <p>
-                                        내 생각의 함정 : {flow.factButton.map((fact) => {
+                                    <h1>💬 {new Date(flow.createdAt).getMonth()+1}월 {new Date(flow.createdAt).getDate()+1}일의 고민</h1>
+                                    <section  className="title">
+                                        왜곡된 생각<p>{flow.input}</p>
+                                    </section>
+                                    <section  className="title">  내 생각의 함정
+                                    <li>
+                                    {flow.factButton.map((fact) => {
                                             return <span>{fact} </span>
                                         })}
-                                    </p>
+                                    </li>
+                                    </section>
+                                    <section className="title">
+                                        수정한 생각 
+                                        <p>{flow.fix}</p>
+                                    </section>
+                                    <button onClick={onCloseClick}>닫기</button>
                                     <button className="deleteButton" onClick={onDeleteClick} >
                                         지우기
                                     </button>
-                                    <button onClick={onCloseClick}>닫기</button>
                                 </div>
                             )
                         }

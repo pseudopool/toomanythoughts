@@ -28,7 +28,7 @@ const AuthContainer = styled.div`
         }
         .submit {
             cursor: pointer;
-            font-weight: 600;
+            font-weight: 500;
         }
         .submit:hover {
             background: #ADB5C9;
