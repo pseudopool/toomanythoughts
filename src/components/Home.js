@@ -1,8 +1,15 @@
 import React from "react";
+import { motion } from "framer-motion";
 
 const Home = () => {
     return (
-        <span>Toomanythoughts</span>
+        <motion.div
+        initial={{opacity: 0}}
+        animate={{opacity: 1}}
+        exit={{opacity: 0}}
+        >
+        <header className="logo">Toomanythoughts</header>
+        </motion.div>
     )
 }
 export default Home;
