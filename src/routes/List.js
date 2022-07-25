@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import { authService, dbService } from "firebaseInstance";
 import { collection, query, onSnapshot, where, deleteDoc, doc } from "firebase/firestore";
+import styled from "styled-components";
 
 const List = ({setIsLoggedIn, userObj}) => {
     const [flows, setFlows] = useState([]);
@@ -24,6 +25,42 @@ const List = ({setIsLoggedIn, userObj}) => {
             setIsClikced(false)
     }
 
+    const OverlayWrapper = styled.div`
+        position: absolute;
+        background-color: white;
+        color: black;
+        padding: 5px;
+        border-radius: 15px;
+        width: 50%;
+        height: 50%;
+        left: 25%;
+        top: 10%;
+        line-height: 2rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        button {
+            margin-bottom: 0.5rem;
+            padding: 0.5rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            width: 5rem;
+            border-radius: 0.8rem;
+            border: 0px;
+            cursor: pointer;
+            :active {
+                background-color: #433886;
+                color: white;
+            }
+        }
+        div {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+    `
+
     const Overlay = ({flows, clickedFlow}) => {
         const onDeleteClick = async () => {
             setIsClikced(false)
@@ -31,7 +68,7 @@ const List = ({setIsLoggedIn, userObj}) => {
             await deleteDoc(flowRef)
         }
             return (
-                <div>
+                <OverlayWrapper>
                     {flows.map((flow) => {
                         if (flow.id === clickedFlow) {
                             return (
@@ -47,15 +84,15 @@ const List = ({setIsLoggedIn, userObj}) => {
                                             return <span>{fact} </span>
                                         })}
                                     </p>
-                                    <button onClick={onDeleteClick} >
+                                    <button className="deleteButton" onClick={onDeleteClick} >
                                         지우기
                                     </button>
+                                    <button onClick={onCloseClick}>닫기</button>
                                 </div>
                             )
                         }
                     })}
-                    <button onClick={onCloseClick}>닫기</button>
-                </div>
+                </OverlayWrapper>
             )
         }
 
