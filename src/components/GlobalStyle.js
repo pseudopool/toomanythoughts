@@ -30,6 +30,10 @@ const GlobalStyle = createGlobalStyle`
         font-weight: 300;
         line-height: 1.3rem;
         }
+        .logo {
+            font-family: 'Baloo Tamma 2', cursive;
+            font-weight: 800;
+        }
     }
     textarea {
         width: 250px;

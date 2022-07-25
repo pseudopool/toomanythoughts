@@ -4,11 +4,13 @@ import styled from 'styled-components'
 const FixContainer = styled.div`
     div.fact_result {
         display: flex;
-        flex-direction: row;
-        align-items: center;
         justify-content: center;
-    }
-    li {
+        flex-wrap: wrap;
+        width: 250px;
+        li {
+        height: 25px;
+        width: 73px;
+        text-align: center;
         list-style: none;
         display: block;
         padding: 0.5rem;
@@ -16,6 +18,9 @@ const FixContainer = styled.div`
         margin: 0 0.3rem 1rem 0.3rem;
         background-color: white;
         color: #0C072F;
+        font-size: 0.7rem;
+        font-weight: 900;
+    }
     }
 `;
 

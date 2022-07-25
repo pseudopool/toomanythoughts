@@ -2,8 +2,52 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import { authService, dbService } from "firebaseInstance";
-import { collection, query, onSnapshot, where, deleteDoc, doc } from "firebase/firestore";
+import { collection, query, onSnapshot, where, deleteDoc, doc, orderBy } from "firebase/firestore";
 import styled from "styled-components";
+
+const ListContainer = styled.div`
+    .lists {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    form {
+        button {
+        width: 210px;
+        border: 0;
+        padding: 0.8rem;
+        border-radius: 0.8rem;
+        margin-bottom: 1rem;
+        font-weight: 700;
+        cursor: pointer;
+        :hover {
+            background-color: #ADB5C9;
+        }
+        }
+    }
+
+    footer {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        margin-top: 4rem;
+            .add{
+            font-size: 2rem;
+            padding: 0;
+            width: 50px;
+            height: 50px;
+            border-radius: 100%;
+            font-weight: 500;
+        }
+            .logout{
+                background-color: transparent;
+                color: #ADB5C9;
+                font-weight: 400;
+            }
+    }
+`
 
 const List = ({setIsLoggedIn, userObj}) => {
     const [flows, setFlows] = useState([]);
@@ -97,7 +141,7 @@ const List = ({setIsLoggedIn, userObj}) => {
         }
 
         useEffect(() => {
-            const q = query(collection(dbService, "flow"), where("creatorId", "==", userObj.uid))
+            const q = query(collection(dbService, "flow"), where("creatorId", "==", userObj.uid), orderBy("createdAt", "desc"))
             onSnapshot(q, (snapshot) => {
                 const flowArr = snapshot.docs.map((flow) => ({
                     ...flow.data(),
@@ -109,51 +153,50 @@ const List = ({setIsLoggedIn, userObj}) => {
         }, [])
 
     return (
+        <ListContainer>
             <main className="list_container">
                 <header>
-                    <h1>내 생각 목록📂</h1>
-                    <hr />
+                    <h1>내 생각 목록 📂</h1>
                 </header>
                 <section>
                     <h3>오늘</h3>
+                    <div className="lists">
                     {flows.map((flow) => {
                         if(flow.createdAt === new Date().toLocaleDateString()) {
                         return (
                             <form key={flow.id} name={flow.id} onSubmit={handleOnSubmit}>
                                 <button>
-                                    오늘의 고민
+                                    💬 오늘의 고민
                                 </button>
                             </form>
                         )
-                        } else {
-                            return (
-                                <p>
-                                    오늘의 고민은 없습니다.
-                                </p>
-                            )
                         }
                     })}
+                    </div>
                 </section>
                 <section>
                     <h3>과거</h3>
+                    <div className="lists">
                     {flows.map((flow) => {
                         if(flow.createdAt !== new Date().toLocaleDateString()) {
                         return (
                             <form key={flow.id} name={flow.id} onSubmit={handleOnSubmit}>
                                 <button>
-                                    {flow.createdAt}
+                                💬 {new Date(flow.createdAt).getMonth()+1}월 {new Date(flow.createdAt).getDate()+1}일의 고민
                                 </button>
                             </form>
                         )
                         }
                     })}
+                    </div>
                 </section>
                 {isClicked && <Overlay flows={flows} clickedFlow={clickedFlow}/>}
                 <footer>
-                    <Link to="/"><button className="return_to_list">+</button></Link>
-                    <Link to="/"><button onClick={onLogOutClick}>Log Out</button></Link>
+                <Link to="/"><button className="add">+</button></Link>
+                <Link to="/"><button className="logout" onClick={onLogOutClick}>Log Out</button></Link>
                 </footer>
             </main>
+        </ListContainer>
     )
 }
 export default List;

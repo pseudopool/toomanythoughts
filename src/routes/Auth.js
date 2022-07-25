@@ -2,6 +2,38 @@ import React from "react";
 import { useState } from "react";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { authService } from "firebaseInstance";
+import styled from "styled-components";
+
+const AuthContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    form {
+        display: flex;
+        flex-direction: column;
+        width: 15rem;
+        }
+        input {
+            margin: 0.5rem;
+            padding: 0.5rem;
+            border-radius: 0.3rem;
+            border: 0;
+            }
+        .auth {
+            background-color: transparent;
+            border-radius: 0;
+            border-bottom: 1px solid white;
+            color: #CECCDE;
+        }
+        .submit {
+            cursor: pointer;
+            font-weight: 600;
+        }
+        .submit:hover {
+            background: #ADB5C9;
+        }
+`
     
 const Auth = () => {
     const [email, setEmail] = useState('');
@@ -31,8 +63,7 @@ const Auth = () => {
             setError(error.message.replace("Firebase:", ""))
         }
     }
-    const toggleAccount = () => setNewAccount((prev) => !prev)
-    const onSocialClick = async (event) => {
+    const onClick = async (event) => {
         const {
             target: {name}, 
         } = event;
@@ -40,36 +71,43 @@ const Auth = () => {
         const data = await signInWithPopup(authService, provider);
         console.log(data)
     }
-    return (
-    <div>
-    <form onSubmit={onSubmit}>
-        <input 
-            name="email" 
-            type="text" 
-            placeholder="Email" 
-            required 
-            value={email}
-            onChange={onChange}/>
-        <input 
-            name="password" 
-            type="password" 
-            placeholder="Password" 
-            required 
-            value={password}
-            onChange={onChange}/>
-        <input 
-            type="submit" 
-            value={newAccount ? "create Account" : "Log in"} />
-        {error}
-    </form>
-    <span onClick={toggleAccount}>
-        {newAccount ? "Sign In" : "Create Account"}
-    </span>
 
-    <div>
-        <button name="google" onClick={onSocialClick}>Continue with Google</button>
-    </div>
-</div>
+    return (
+    <AuthContainer>
+        <header>
+            <h1 className="logo">toomanythoughts.</h1>
+        </header>
+        <form onSubmit={onSubmit}>
+            <input 
+                name="email" 
+                className="auth"
+                type="text"
+                placeholder="e-mail" 
+                required 
+                value={email}
+                onChange={onChange}/>
+            <input 
+                name="password" 
+                type="password" 
+                className="auth"
+                placeholder="password" 
+                required 
+                value={password}
+                onChange={onChange}/>
+            <input 
+                type="submit"
+                name="submit"
+                className="submit"
+                value={newAccount ? "Log in with e-mail" : "Log in"} />
+            <input
+                type="button"
+                onClick={onClick}
+                name="google" 
+                className="submit"
+                value="Log in with Google" />
+            {error}
+        </form>
+    </AuthContainer>
 )
 }
 
