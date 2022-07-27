@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/toomanythoughts/static/js/main.1f577c1f.js",
+    "main.js": "/toomanythoughts/static/js/main.64c04744.js",
     "index.html": "/toomanythoughts/index.html",
-    "main.1f577c1f.js.map": "/toomanythoughts/static/js/main.1f577c1f.js.map"
+    "main.64c04744.js.map": "/toomanythoughts/static/js/main.64c04744.js.map"
   },
   "entrypoints": [
-    "static/js/main.1f577c1f.js"
+    "static/js/main.64c04744.js"
   ]
 }
