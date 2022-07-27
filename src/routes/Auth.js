@@ -14,8 +14,8 @@ const AuthContainer = styled.div`
         display: flex;
         flex-direction: column;
         width: 15rem;
-        }
-        input {
+    }
+        input, button {
             margin: 0.5rem;
             padding: 0.5rem;
             border-radius: 0.3rem;
@@ -34,6 +34,18 @@ const AuthContainer = styled.div`
         .submit:hover {
             background: #ADB5C9;
         }
+        .signin {
+            background-color: transparent;
+            color: white;
+            font-size: 0.3rem;
+            margin: 0;
+            cursor: pointer;
+            border: 0;
+            float: left;
+        }
+        .googleImg {
+            background-image: url('');
+        }
 `
     
 const Auth = () => {
@@ -42,6 +54,8 @@ const Auth = () => {
     const [newAccount, setNewAccount] = useState(true);
     const [error, setError] = useState('')
     const auth = getAuth();
+
+    
     const onChange = (event) => {
         const {target: {name, value}} = event;
         if (name === "email") {
@@ -50,27 +64,26 @@ const Auth = () => {
             setPassword(value)
         }
     }
-    const onSubmit = async (event) => {
+    const onClick = async (event) => {
         event.preventDefault();
         try {
             let data;
-        if(newAccount) {
+        if(event.target.name === "signin") {
             data = await createUserWithEmailAndPassword(auth, email, password)
-        } else {
+        } else if (event.target.name === "login") {
             data = await signInWithEmailAndPassword(auth, email, password)
+        } else if (event.target.name === "google") {
+            const {
+                target: {name}, 
+            } = event;
+            let provider = new GoogleAuthProvider();
+            const data = await signInWithPopup(authService, provider);
+            console.log(data)
         }
         console.log(data)
         } catch (error) {
             setError(error.message.replace("Firebase:", ""))
         }
-    }
-    const onClick = async (event) => {
-        const {
-            target: {name}, 
-        } = event;
-        let provider = new GoogleAuthProvider();
-        const data = await signInWithPopup(authService, provider);
-        console.log(data)
     }
 
     return (
@@ -83,7 +96,7 @@ const Auth = () => {
         <header>
             <h1 className="logo">toomanythoughts.</h1>
         </header>
-        <form onSubmit={onSubmit}>
+        <form>
             <input 
                 name="email" 
                 className="auth"
@@ -100,17 +113,27 @@ const Auth = () => {
                 required 
                 value={password}
                 onChange={onChange}/>
-            <input 
+            <button
                 type="submit"
-                name="submit"
-                className="submit"
-                value={newAccount ? "Log in with e-mail" : "Log in"} />
-            <input
+                name="signin"
+                className="signin"
+                onClick={onClick}>
+            이 메일로 가입하기 </button>
+            <button
                 type="button"
-                onClick={onClick}
                 name="google" 
                 className="submit"
-                value="Log in with Google" />
+                onClick={onClick}>
+            Continue with Google
+            <p className="googleImg"></p>
+            </button>
+            <button
+                type="submit"
+                name="login"
+                className="submit"
+                onClick={onClick}>
+            Log in
+            </button>
             {error}
         </form>
     </AuthContainer>
