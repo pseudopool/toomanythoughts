@@ -238,7 +238,7 @@ const List = ({setIsLoggedIn, userObj}) => {
                         return (
                             <form key={flow.id} name={flow.id} onSubmit={handleOnSubmit}>
                                 <button>
-                                💬 {new Date(flow.createdAt).getMonth()+1}월 {new Date(flow.createdAt).getDate()+1}일의 고민
+                                💬 {new Date(flow.createdAt).getMonth()+1}월 {new Date(flow.createdAt).getDate()}일의 고민
                                 </button>
                             </form>
                         )
