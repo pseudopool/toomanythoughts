@@ -46,12 +46,15 @@ const AuthContainer = styled.div`
         .googleImg {
             background-image: url('');
         }
+        .error {
+            font-size: 0.5rem;
+            float: right;
+        }
 `
     
 const Auth = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [newAccount, setNewAccount] = useState(true);
     const [error, setError] = useState('')
     const auth = getAuth();
 
@@ -82,7 +85,13 @@ const Auth = () => {
         }
         console.log(data)
         } catch (error) {
-            setError(error.message.replace("Firebase:", ""))
+            setError(error.message
+                .replace("Firebase:", "")
+                .replace("Error", "")
+                .replace("auth/", "")
+                .replace("(", "")
+                .replace(")", "")
+                )
         }
     }
 
@@ -134,7 +143,9 @@ const Auth = () => {
                 onClick={onClick}>
             Log in
             </button>
+            <span className="error">
             {error}
+            </span>
         </form>
     </AuthContainer>
     </motion.div>
