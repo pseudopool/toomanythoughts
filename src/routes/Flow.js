@@ -40,7 +40,7 @@ const Flow = ({input, fix, factButton, userObj}) => {
             createdAt: new Date().toLocaleDateString(),
             creatorId: userObj.uid
         })
-        window.location.replace('/list')
+        window.location.replace('/toomanythoughts/list')
     }
 
     return (
@@ -72,7 +72,7 @@ const Flow = ({input, fix, factButton, userObj}) => {
         </section>
         <footer>
             <form onSubmit={handleOnSubmit}><button className="input_submit">저장</button></form>
-            <Link to="/fix"><button className="return_to_list">돌아가기</button></Link>
+            <Link to="/toomanythoughts/fix"><button className="return_to_list">돌아가기</button></Link>
         </footer>
     </main>
     </FlowContainer>

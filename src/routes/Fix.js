@@ -60,8 +60,8 @@ function Fix({factButton, input, fix, setFix}) {
                 <textarea onChange={handleFixChnage} placeholder="사실만을 적어보세요."/>
         </section>
         <footer>
-            <Link to="/flow"><button className="input_submit">입력 완료</button></Link>
-            <Link to="/factcheck"><button className="return_to_list">돌아가기</button></Link>
+            <Link to="/toomanythoughts/flow"><button className="input_submit">입력 완료</button></Link>
+            <Link to="/toomanythoughts/factcheck"><button className="return_to_list">돌아가기</button></Link>
         </footer>
     </main>
     </FixContainer>

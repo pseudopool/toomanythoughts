@@ -24,8 +24,8 @@ const Input = ({input, setInput}) => {
                     <textarea onChange={handleInputChange} placeholder="시험을 망칠까봐 무서워요."/>
                 </section>
                 <footer>
-                    <Link to ="/factcheck"><button className="input_submit">입력 완료</button></Link>
-                    <Link to="/list"><button className="return_to_list">리스트 보기</button></Link>
+                    <Link to ="/toomanythoughts/factcheck"><button className="input_submit">입력 완료</button></Link>
+                    <Link to="/toomanythoughts/list"><button className="return_to_list">리스트 보기</button></Link>
                 </footer>
             </main>
         </motion.div>
